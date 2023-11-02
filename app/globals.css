@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --timing: 500ms;
+  --rotation: 20deg;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,4 +21,125 @@ body {
 .container-global {
   margin-inline: auto;
   width: min(90%, 72rem);
+}
+
+/* CARD */
+
+.card {
+  position: relative;
+  overflow: hidden;
+}
+.card img {
+  border: .125em solid rgba(198, 112, 1, 0.842);
+  object-fit: cover;
+}
+
+.card:after {
+  content: "";
+  position: absolute;
+  top: -1.4rem;
+  right: -1.5rem;
+  width: 40px;
+  height: 55px;
+  transform: rotate(-45deg);
+  background-color: #1e1e1e;
+  border: .125em solid rgba(198, 112, 1, 0.842);
+  box-shadow: 0 0 0 250px transparent;
+}
+
+/* CARD BTN */
+
+.card-btn {
+  /* --border-color: #008080; */
+  --border-color: rgba(198, 112, 1, 0.842);
+  --border-width: .125em;
+  --curve-size: .5em;
+  --blur: 30px;
+  --bg: #111111e0;
+  position: absolute;
+  isolation: isolate;
+  display: inline-grid;
+  place-content: center;
+  padding: .5em 1.5em;
+  text-transform: uppercase;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, .6);
+  text-shadow: .188rem .188rem .25rem #000;
+  clip-path: polygon(
+            0% var(--curve-size),
+
+            var(--curve-size) 0,
+            100% 0,
+            100% calc(100% - var(--curve-size)),
+
+            calc(200% - var(--curve-size)) 100%,
+            0 100%);
+  transition: color 250ms;
+}
+
+.card-btn::after,
+.card-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.card-btn::before {
+  background: var(--border-color);
+  background-size: 300% 300%;
+  animation: move-bg7234 5s ease infinite;
+  z-index: -2;
+}
+
+.card-btn::after {
+  background: var(--bg);
+  z-index: -1;
+  clip-path: polygon(
+            /* Top-left */
+            var(--border-width) 
+            calc(var(--curve-size) + var(--border-width) * .5),
+
+            calc(var(--curve-size) + var(--border-width) * .5) var(--border-width),
+
+            /* top-right */
+            calc(100% - var(--border-width)) 
+            var(--border-width),
+
+            calc(100% - var(--border-width)) 
+            calc(100% - calc(var(--curve-size) + var(--border-width) * .5)),
+
+            /* bottom-right 1 */
+            calc(100% - calc(var(--curve-size) + var(--border-width) * .5)) calc(100% - var(--border-width)),
+            /* bottom-right 2 */
+            var(--border-width) calc(100% - var(--border-width)));
+  transition: clip-path 500ms;
+}
+
+.card-btn:where(:hover, :focus)::after {
+  clip-path: polygon(
+                /* Top-left */
+                calc(100% - var(--border-width)) 
+
+                calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+    
+                calc(100% - var(--border-width))
+
+                var(--border-width),
+    
+                /* top-right */
+                calc(100% - var(--border-width))
+
+                 var(--border-width),
+    
+                calc(100% - var(--border-width)) 
+
+                calc(100% - calc(var(--curve-size) + var(--border-width) * .5)),
+    
+                /* bottom-right 1 */
+                calc(100% - calc(var(--curve-size) + var(--border-width) * .5)) 
+                calc(100% - var(--border-width)),
+
+                /* bottom-right 2 */
+                calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+                calc(100% - var(--border-width)));
+  transition: 200ms;
 }

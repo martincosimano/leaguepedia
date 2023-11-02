@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'gold-100': '#f08c00',
+        'teal-100': '#008080',
+      }
     }
   },
   plugins: [],
