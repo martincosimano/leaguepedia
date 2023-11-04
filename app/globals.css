@@ -28,13 +28,18 @@ body {
 .card {
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 .card img {
-  border: .125em solid rgba(198, 112, 1, 0.842);
+  border-radius: 1px;
   object-fit: cover;
+  transition: 250ms ease-in-out;
+}
+.card:hover img {
+  transform: scale(1.05);
 }
 
-.card:after {
+.card::after {
   content: "";
   position: absolute;
   top: -1.4rem;
@@ -43,7 +48,7 @@ body {
   height: 55px;
   transform: rotate(-45deg);
   background-color: #1e1e1e;
-  border: .125em solid rgba(198, 112, 1, 0.842);
+
   box-shadow: 0 0 0 250px transparent;
 }
 
@@ -114,9 +119,9 @@ body {
   transition: clip-path 500ms;
 }
 
-.card-btn:where(:hover, :focus)::after {
+.card:where(:hover, :focus) .card-btn::after {
   clip-path: polygon(
-                /* Top-left */
+
                 calc(100% - var(--border-width)) 
 
                 calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
@@ -125,7 +130,7 @@ body {
 
                 var(--border-width),
     
-                /* top-right */
+
                 calc(100% - var(--border-width))
 
                  var(--border-width),
@@ -134,11 +139,11 @@ body {
 
                 calc(100% - calc(var(--curve-size) + var(--border-width) * .5)),
     
-                /* bottom-right 1 */
+
                 calc(100% - calc(var(--curve-size) + var(--border-width) * .5)) 
                 calc(100% - var(--border-width)),
 
-                /* bottom-right 2 */
+
                 calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
                 calc(100% - var(--border-width)));
   transition: 200ms;

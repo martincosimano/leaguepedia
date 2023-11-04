@@ -1,6 +1,9 @@
 import Image from "next/image";
 
 const Card = () => {
+
+
+
     return (
         <div className="card h-80 w-fit drop-shadow-xl">
             <Image className="h-full object-cover" src="/Aatrox.jpg" width="230" height="100" />
