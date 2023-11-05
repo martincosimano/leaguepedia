@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DropdownRoles from "./DropdownRoles";
 import Card from "./Card";
 
+// Roles navbar
 const ChampionsSection = () => {
 
     const [selected, setSelected] = useState({
@@ -22,11 +23,35 @@ const ChampionsSection = () => {
         }));
     }
 
+    // Dropdown menu
     const [active, setActive] = useState(false)
 
     function handleActive() {
         setActive(prevActive => !prevActive)
     }
+
+    // Card display
+    const [apiData, setApiData] = useState([]);
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                const data = await fetch(
+                    "http://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/champion.json"
+                );
+                if (!data.ok) {
+                    throw new Error(`HTTP error! Status: ${data.status}`);
+                }
+                const res = await data.json();
+                const championsData = Object.values(res.data);
+        
+                setApiData(championsData);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+        getData();
+    }, []);
 
     return (
         <section className="mt-6 md:my-10">
@@ -61,8 +86,10 @@ const ChampionsSection = () => {
                 </ul>
             </nav>
 
-            <div className="mt-6 md:mt-10">
-                <Card />
+            <div className="mt-6 md:mt-10 flex flex-wrap gap-6 justify-between">
+                {apiData.map((champion, index) => (
+                    <Card key={index} championName={champion.name} championImg={champion.image.full.split('.')[0]} />
+                ))}
             </div>
         </section>
     )
