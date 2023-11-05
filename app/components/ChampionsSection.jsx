@@ -90,7 +90,7 @@ const ChampionsSection = () => {
             <div className="flex gap-2 md:hidden cursor-pointer w-fit" onClick={handleActive}>
                 <Image src="/down-arrow.svg" width="20" height="20" alt="" />
                 <button className="text-lg font-medium uppercase">Roles</button>
-                {active && <DropdownRoles />}
+                {active && <DropdownRoles handleSelection={handleSelection} />}
             </div>
             <nav className="hidden md:flex">
                 <ul className="hidden md:flex justify-between w-full list-none">
