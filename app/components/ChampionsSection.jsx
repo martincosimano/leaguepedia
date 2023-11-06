@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import ClipLoader from "react-spinners/ClipLoader";
 import DropdownRoles from "./DropdownRoles";
 import Card from "./Card";
 
@@ -108,15 +109,20 @@ const ChampionsSection = () => {
                 </ul>
             </nav>
 
-            <div className="mt-6 md:mt-10 flex flex-wrap gap-6 mx-0.5">
-                {filteredChampions.map((champion, index) => (
-                    <Card
-                        key={index}
-                        championName={champion.name}
-                        championImg={champion.image.full.split(".")[0]}
-                    />
-                ))}
-            </div>
+            {!apiData.length ?
+                <div className="flex justify-center items-center h-96">
+                    <ClipLoader color={"rgba(198, 112, 1, 0.842)"} />
+                </div> :
+                <div className="mt-6 md:mt-10 flex flex-wrap gap-6 mx-1 clear">
+                    {filteredChampions.map((champion, index) => (
+                        <Card
+                            key={index}
+                            championName={champion.name}
+                            championImg={champion.image.full.split(".")[0]}
+                        />
+                    ))}
+                </div>
+            }
         </section>
     );
 };
