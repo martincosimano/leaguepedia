@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ClipLoader from "react-spinners/ClipLoader";
 import DropdownRoles from "./DropdownRoles";
+import SearchBar from './SearchBar';
 import Card from "./Card";
 
 // Roles navbar
@@ -76,6 +77,20 @@ const ChampionsSection = () => {
         }
     }
 
+    const [searchText, setSearchText] = useState(""); // State to store search input
+
+    // Handle search input change
+    const handleSearch = (text) => {
+        // Remove spaces and apostrophes from the search input
+        const formattedText = text.replace(/[' . &]/g, "").toLowerCase();
+        setSearchText(formattedText);
+    };
+
+    // Filter champions based on the search input
+    const filteredChampionsByName = filteredChampions.filter((champion) =>
+        champion.name.replace(/[' . &]/g, "").toLowerCase().includes(searchText)
+    );
+
     const roleButtons = [
         { role: "All", label: "All" },
         { role: "Assassin", label: "Assassins" },
@@ -88,6 +103,7 @@ const ChampionsSection = () => {
 
     return (
         <section className="mt-6 md:my-10">
+            <SearchBar onSearch={handleSearch} />
             <div className="flex gap-2 md:hidden cursor-pointer w-fit" onClick={handleActive}>
                 <Image src="/down-arrow.svg" width="20" height="20" alt="" />
                 <button className="text-lg font-medium uppercase">Roles</button>
@@ -98,7 +114,7 @@ const ChampionsSection = () => {
                     {roleButtons.map((roleButton) => (
                         <li key={roleButton.role}>
                             <button
-                                className={`text-lg font-medium uppercase ${selected[roleButton.role] && "border-b-2 border-gold-100"
+                                className={`text-lg font-medium uppercase opacity-80 ${selected[roleButton.role] && "border-b-2 border-gold-100 opacity-100"
                                     }`}
                                 onClick={() => handleSelection(roleButton.role)}
                             >
@@ -113,8 +129,8 @@ const ChampionsSection = () => {
                 <div className="flex justify-center items-center h-96">
                     <ClipLoader color={"rgba(198, 112, 1, 0.842)"} />
                 </div> :
-                <div className="mt-6 md:mt-10 flex flex-wrap gap-6 mx-1 clear">
-                    {filteredChampions.map((champion, index) => (
+                <div className="mt-6 md:mt-10 flex flex-wrap gap-5 md:gap-6 mx-1 clear">
+                    {filteredChampionsByName.map((champion, index) => (
                         <Card
                             key={index}
                             championName={champion.name}
