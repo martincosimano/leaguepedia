@@ -10,8 +10,11 @@ module.exports = {
       colors: {
         'gold-100': '#f08c00',
         'teal-100': '#008080',
-        'dark-100': '#1e1e1e',
-        'dark-200': '#373737',
+        'opaque-100': '#1e1e1e',
+        'opaque-200': '#373737',
+      },
+      spacing: {
+        '100': '40rem', 
       }
     }
   },

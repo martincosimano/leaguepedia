@@ -134,7 +134,7 @@ const ChampionsSection = () => {
                         <Card
                             key={index}
                             championName={champion.name}
-                            championImg={champion.image.full.split(".")[0]}
+                            championUrl={champion.id}
                         />
                     ))}
                 </div>

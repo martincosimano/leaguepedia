@@ -149,3 +149,8 @@ body {
                 calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
                 calc(100% - var(--border-width)));
 }
+
+/* CHAMPION */
+.banner {
+  object-position: 50% 20%;
+}

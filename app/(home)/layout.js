@@ -1,6 +1,6 @@
+import '../styles/globals.css'
 import { DM_Sans } from 'next/font/google'
-import './globals.css'
-import Navbar from "./components/Navbar"
+import Navbar from '../components/Navbar'
 
 const dmsans = DM_Sans({ subsets: ['latin'] })
 
