@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
+import SkillInfo from '@/app/components/SkillInfo';
 
 const Champion = () => {
     const pathname = usePathname();
@@ -70,42 +71,8 @@ const Champion = () => {
                             </div>
                         </section>
                         <section className='mt-6'>
-                            <h2 className='text-2xl font-semibold'>Abilities</h2>
-                            <nav>
-                                <ul className='flex mt-3 gap-5'>
-                                    <li>
-                                        <button className='rounded-md border-2 border-transparent opacity-80 focus:opacity-100 focus:border-gold-100'>
-                                            <Image className='rounded-md shadow-lg cursor-pointer' src={`http://ddragon.leagueoflegends.com/cdn/13.21.1/img/passive/${apiData[0]?.passive.image.full}`} width="50" height="50" alt="" ></Image>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button className='rounded-md border-2 border-transparent opacity-80 focus:opacity-100 focus:border-gold-100'>
-                                            <Image className='rounded-md shadow-lg cursor-pointer' src={`http://ddragon.leagueoflegends.com/cdn/13.21.1/img/spell/${apiData[0]?.spells[0].image.full}`} width="50" height="50" alt="" ></Image>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button className='rounded-md border-2 border-transparent opacity-80 focus:opacity-100 focus:border-gold-100'>
-                                            <Image className='rounded-md shadow-lg cursor-pointer' src={`http://ddragon.leagueoflegends.com/cdn/13.21.1/img/spell/${apiData[0]?.spells[1].image.full}`} width="50" height="50" alt="" ></Image>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button className='rounded-md border-2 border-transparent opacity-80 focus:opacity-100 focus:border-gold-100'>
-                                            <Image className='rounded-md shadow-lg cursor-pointer' src={`http://ddragon.leagueoflegends.com/cdn/13.21.1/img/spell/${apiData[0]?.spells[2].image.full}`} width="50" height="50" alt="" ></Image>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button className='rounded-md border-2 border-transparent opacity-80 focus:opacity-100 focus:border-gold-100'>
-                                            <Image className='rounded-md shadow-lg cursor-pointer' src={`http://ddragon.leagueoflegends.com/cdn/13.21.1/img/spell/${apiData[0]?.spells[3].image.full}`} width="50" height="50" alt="" ></Image>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <div className='mt-6'>
-                                <h2 className='text-2xl font-semibold'>Description</h2>
-                                <div className='mt-3 max-w-3xl'>
-                                    <p className='text-gray-300'>Jinx receives massively increased Move Speed and Attack Speed whenever she helps kill or destroy an enemy champions epic jungle monster, or structure.</p>
-                                </div>
-                            </div>
+                            <h2 className='text-2xl font-semibold'>Skills</h2>
+                            <SkillInfo apiData={apiData} />
                         </section>
                     </div>
                 </section>

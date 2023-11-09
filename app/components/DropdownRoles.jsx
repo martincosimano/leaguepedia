@@ -19,12 +19,12 @@ const DropdownRoles = ({ handleSelection }) => {
     };
 
     return (
-        <nav className="absolute mt-8 z-10 bg-dark-100 w-full opacity-90 rounded-sm p-2">
+        <nav className="absolute mt-8 z-10 bg-dark-150 w-2/3 opacity-90 rounded-sm p-2">
             <ul className="flex flex-col gap-0.5">
                 {roleButtons.map((role) => (
                     <li key={role.role}>
                         <button
-                            className={`text-md font-medium uppercase focus:text-gold-100 ${
+                            className={`text-md font-medium uppercase w-full text-start px-2 focus:text-gold-100 focus:bg-dark-100 ${
                                 selected === role ? "text-gold-100" : ""
                             }`}
                             onClick={() => handleRoleSelection(role.role)}
