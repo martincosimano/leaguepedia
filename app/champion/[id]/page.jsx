@@ -15,7 +15,7 @@ const Champion = () => {
         async function getData() {
             try {
                 const data = await fetch(
-                    `http://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/champion/${championName}.json`
+                    `https://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/champion/${championName}.json`
                 );
                 if (!data.ok) {
                     throw new Error(`HTTP error! Status: ${data.status}`);
