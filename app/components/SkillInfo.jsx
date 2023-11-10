@@ -53,7 +53,7 @@ const SkillInfo = ({ apiData }) => {
                                     }`}
                                 onClick={() => handleSelection(skillButton.type, skillButton.id)}
                             >
-                                <Image className='rounded-md shadow-lg cursor-pointer' src={`http://ddragon.leagueoflegends.com/cdn/13.21.1/img/${skillButton.type === "passive" ? `passive/${apiData[0]?.passive.image.full}` : `spell/${apiData[0]?.spells[skillButton.id]?.image.full}`}`} width="50" height="50" alt="" ></Image>
+                                <Image className='rounded-md shadow-lg cursor-pointer' src={`https://ddragon.leagueoflegends.com/cdn/13.21.1/img/${skillButton.type === "passive" ? `passive/${apiData[0]?.passive.image.full}` : `spell/${apiData[0]?.spells[skillButton.id]?.image.full}`}`} width="50" height="50" alt="" ></Image>
                             </button>
                         </li>
                     ))}

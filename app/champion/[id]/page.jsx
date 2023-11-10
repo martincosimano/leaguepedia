@@ -39,7 +39,7 @@ const Champion = () => {
                 <section className='mb-10'>
                     <Image
                         className='banner w-full object-cover md:max-h-100'
-                        src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${apiData[0]?.id}_0.jpg`}
+                        src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${apiData[0]?.id}_0.jpg`}
                         width="900"
                         height="100"
                         alt=""
