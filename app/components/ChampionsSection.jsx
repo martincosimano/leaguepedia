@@ -31,24 +31,41 @@ const ChampionsSection = () => {
     const [filteredChampions, setFilteredChampions] = useState([]);
 
     useEffect(() => {
-        async function getData() {
-            try {
-                const data = await fetch(
-                    "https://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/champion.json"
-                );
-                if (!data.ok) {
-                    throw new Error(`HTTP error! Status: ${data.status}`);
-                }
-                const res = await data.json();
-                const championsData = Object.values(res.data);
+        // Check if data is in local storage
+        const storedData = localStorage.getItem("championData");
 
-                setApiData(championsData);
-                setFilteredChampions(championsData);
-            } catch (error) {
-                console.error("Error fetching data:", error);
+        if (storedData) {
+            // If data is present in local storage, use it
+            const championsData = JSON.parse(storedData);
+            setApiData(championsData);
+            setFilteredChampions(championsData);
+        } else {
+            // Fetch data from API and store it in local storage
+            async function getData() {
+                try {
+                    const data = await fetch(
+                        "https://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/champion.json"
+                    );
+
+                    if (!data.ok) {
+                        throw new Error(`HTTP error! Status: ${data.status}`);
+                    }
+
+                    const res = await data.json();
+                    const championsData = Object.values(res.data);
+
+                    setApiData(championsData);
+                    setFilteredChampions(championsData);
+
+                    // Store data in local storage
+                    localStorage.setItem("championData", JSON.stringify(championsData));
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                }
             }
+
+            getData();
         }
-        getData();
     }, []);
 
     function handleSelection(role) {

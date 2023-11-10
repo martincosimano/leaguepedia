@@ -18,9 +18,6 @@ const Champion = () => {
                 const data = await fetch(
                     `https://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/champion/${championName}.json`
                 );
-                if (!data.ok) {
-                    throw new Error(`HTTP error! Status: ${data.status}`);
-                }
                 const res = await data.json();
                 const championsData = Object.values(res.data);
 
