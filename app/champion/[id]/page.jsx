@@ -63,7 +63,7 @@ const Champion = () => {
                             </Link>
                         </div>
                         <div className='relative -top-10 sm:-top-14'>
-                            <h1 className='text-3xl sm:text-4xl font-bold text-white uppercase tracking-wide'>
+                            <h1 className='champion-title text-3xl sm:text-4xl font-bold text-white uppercase tracking-wide'>
                                 {apiData[0]?.name}
                             </h1>
                         </div>
