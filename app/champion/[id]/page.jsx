@@ -29,6 +29,10 @@ const Champion = () => {
         getData();
     }, []);
 
+    const styling = {
+        backgroundImage: `url(${`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${apiData[0]?.id}_0.jpg`})`,
+    }
+
     return (
         <>
             {!apiData.length ? (
@@ -38,12 +42,14 @@ const Champion = () => {
             ) : (
                 <section className='mb-10'>
                     <Image
-                        className='banner w-full object-cover md:max-h-100'
+                        className='banner w-full object-cover md:max-h-100 lg:hidden'
                         src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${apiData[0]?.id}_0.jpg`}
                         width="900"
                         height="100"
                         alt=""
+                        priority={true}
                     />
+                    <div className='parallax hidden lg:block' style={styling}></div>
                     <div className='container-global'>
                         <div className='absolute top-4 flex flex-col justify-between'>
                             <Link href="/">
@@ -57,7 +63,7 @@ const Champion = () => {
                             </Link>
                         </div>
                         <div className='relative -top-10 sm:-top-14'>
-                            <h1 className='text-3xl sm:text-4xl font-bold text-white uppercase'>
+                            <h1 className='text-3xl sm:text-4xl font-bold text-white uppercase tracking-wide'>
                                 {apiData[0]?.name}
                             </h1>
                         </div>

@@ -20,7 +20,7 @@ const SkillInfo = ({ apiData }) => {
 
     const [selectedType, setSelectedType] = useState("passive");
 
-    function handleSelection(type, id) {
+    function handleSelection(type) {
         setSelectedType(type);
 
         if (type === "passive") {
@@ -45,11 +45,11 @@ const SkillInfo = ({ apiData }) => {
     return (
         <>
             <nav>
-                <ul className='flex mt-3 gap-5'>
+                <ul className='flex mt-3 gap-5 drop-shadow-xl w-fit'>
                     {skillButton.map((skillButton) => (
                         <li key={skillButton.type}>
                             <button
-                                className={`rounded-md border-2 ${selected[skillButton.type] ? "opacity-100 border-gold-100" : "border-transparent opacity-80"
+                                className={`rounded-md border-2 ${selected[skillButton.type] ? "opacity-100 border-gold-100 scale-110 ease-in-out duration-75" : "border-transparent opacity-80"
                                     }`}
                                 onClick={() => handleSelection(skillButton.type, skillButton.id)}
                             >

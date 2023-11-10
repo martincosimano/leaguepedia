@@ -6,7 +6,6 @@ import DropdownRoles from "./DropdownRoles";
 import SearchBar from './SearchBar';
 import Card from "./Card";
 
-// Roles navbar
 const ChampionsSection = () => {
 
     // Dropdown menu
@@ -16,6 +15,45 @@ const ChampionsSection = () => {
         setActive(prevActive => !prevActive)
     }
 
+    // Fetching Api
+    const [apiData, setApiData] = useState([]);
+    const [filteredChampions, setFilteredChampions] = useState([]);
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                const data = await fetch(
+                    "https://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/champion.json"
+                );
+
+                const res = await data.json();
+                const championsData = Object.values(res.data);
+
+                setApiData(championsData);
+                setFilteredChampions(championsData);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+        getData();
+    }, []);
+
+    // Search functionality
+    const [searchText, setSearchText] = useState("");
+
+    // Handle search input change
+    const handleSearch = (text) => {
+        // Remove spaces and apostrophes from the search input
+        const formattedText = text.replace(/[' . &]/g, "").toLowerCase();
+        setSearchText(formattedText);
+    };
+
+    // Filter champions based on the search input
+    const filteredChampionsByName = filteredChampions.filter((champion) =>
+        champion.name.replace(/[' . &]/g, "").toLowerCase().includes(searchText)
+    );
+
+    // Handling roles filter
 
     const [selected, setSelected] = useState({
         All: true,
@@ -26,47 +64,6 @@ const ChampionsSection = () => {
         Support: false,
         Tank: false,
     });
-
-    const [apiData, setApiData] = useState([]);
-    const [filteredChampions, setFilteredChampions] = useState([]);
-
-    useEffect(() => {
-        // Check if data is in local storage
-        const storedData = localStorage.getItem("championData");
-
-        if (storedData) {
-            // If data is present in local storage, use it
-            const championsData = JSON.parse(storedData);
-            setApiData(championsData);
-            setFilteredChampions(championsData);
-        } else {
-            // Fetch data from API and store it in local storage
-            async function getData() {
-                try {
-                    const data = await fetch(
-                        "https://ddragon.leagueoflegends.com/cdn/13.21.1/data/en_US/champion.json"
-                    );
-
-                    if (!data.ok) {
-                        throw new Error(`HTTP error! Status: ${data.status}`);
-                    }
-
-                    const res = await data.json();
-                    const championsData = Object.values(res.data);
-
-                    setApiData(championsData);
-                    setFilteredChampions(championsData);
-
-                    // Store data in local storage
-                    localStorage.setItem("championData", JSON.stringify(championsData));
-                } catch (error) {
-                    console.error("Error fetching data:", error);
-                }
-            }
-
-            getData();
-        }
-    }, []);
 
     function handleSelection(role) {
         if (role === "All") {
@@ -94,20 +91,6 @@ const ChampionsSection = () => {
         }
     }
 
-    const [searchText, setSearchText] = useState(""); // State to store search input
-
-    // Handle search input change
-    const handleSearch = (text) => {
-        // Remove spaces and apostrophes from the search input
-        const formattedText = text.replace(/[' . &]/g, "").toLowerCase();
-        setSearchText(formattedText);
-    };
-
-    // Filter champions based on the search input
-    const filteredChampionsByName = filteredChampions.filter((champion) =>
-        champion.name.replace(/[' . &]/g, "").toLowerCase().includes(searchText)
-    );
-
     const roleButtons = [
         { role: "All", label: "All" },
         { role: "Assassin", label: "Assassins" },
@@ -124,7 +107,7 @@ const ChampionsSection = () => {
             <div className="flex gap-2 md:hidden cursor-pointer w-fit" onClick={handleActive}>
                 <Image src="/down-arrow.svg" width="20" height="20" alt="" />
                 <button className="text-lg font-medium uppercase">Roles</button>
-                {active && <DropdownRoles handleSelection={handleSelection} />}
+                {active && <DropdownRoles handleSelection={handleSelection} selected={selected} roleButtons={roleButtons} />}
             </div>
             <nav className="hidden md:flex">
                 <ul className="hidden md:flex justify-between w-full list-none">
@@ -141,7 +124,6 @@ const ChampionsSection = () => {
                     ))}
                 </ul>
             </nav>
-
             {!apiData.length ?
                 <div className="flex justify-center items-center h-96">
                     <ClipLoader color={"rgba(198, 112, 1, 0.842)"} />
