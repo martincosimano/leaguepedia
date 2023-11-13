@@ -59,7 +59,7 @@ const SkillInfo = ({ apiData }) => {
                     ))}
                 </ul>
             </nav>
-            <div className='mt-6'>
+            <div className='mt-6 min-h-8'>
                 <h2 className='text-2xl font-semibold'>Description</h2>
                 <div className='mt-3 max-w-3xl'>
                     <p className='text-gray-300'>
