@@ -128,7 +128,7 @@ const ChampionsSection = () => {
                 <div className="flex justify-center items-center h-96">
                     <ClipLoader color={"rgba(198, 112, 1, 0.842)"} />
                 </div> :
-                <div className="mt-6 md:mt-10 grid grid-cols-12 lg:grid-cols-10 gap-3 md:gap-5 mx-1 clear">
+                <div className="mt-6 md:mt-10 grid grid-cols-12 lg:grid-cols-10 gap-3 md:gap-5 mx-1 clear min-h-30">
                     {filteredChampionsByName.map((champion, index) => (
                         <Card
                             key={index}
